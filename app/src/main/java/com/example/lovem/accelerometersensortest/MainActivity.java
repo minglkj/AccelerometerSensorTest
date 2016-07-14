@@ -7,11 +7,13 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private SensorManager sensorManager;
+    private TextView textView;
 
 
     @Override
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textView=(TextView) findViewById(R.id.accelerometer_display);
         sensorManager = (SensorManager) getSystemService
                 (Context.SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "摇一摇",
                         Toast.LENGTH_SHORT).show();
             }
+            textView.setText("xValue: "+xValue+"\n"+"yValue: "+yValue+"\nzValue: "+zValue);
         }
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
